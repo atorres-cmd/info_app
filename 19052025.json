@@ -1,0 +1,22 @@
+[
+    {
+        "id": "85f22034d6a85b75",
+        "type": "function",
+        "z": "db33502388dab964",
+        "name": "UPDATE alarmas_status_pt",
+        "func": "const alarmas = global.get(\"alarmas_status_pt\");\nconst fechaHoraActual = new Date().toISOString();\n\nmsg.topic = `\nINSERT INTO pt_alarmas_hist(\n \n  emergencia_puente_transbordo,\n  exceso_recorrido_adelante_puente,\n  exceso_recorrido_atras_puente,               \n  proteccion_variador_traslacion_puente,    \n  proteccion_motor_traslacion_puente,\n  proteccion_motor_enclavamiento_puente,\n  proteccion_frenos,\n  defecto_variador_traslacion_puente,\n  exceso_velocidad_puente,\n  defecto_fotocelula_galibo_puente,\n  tiempo_ciclo_traslacion_puente,\n  tiempo_ciclo_enclavamiento_puente,\n  defecto_detectores_traslacion_puente,\n  defecto_detectores_enclavamiento_puente,\n  timestamp\n) VALUES (\n  \n  ${alarmas.EMERGENCIA_PUENTE_DE_TRANSBORDO || 0},\n  ${alarmas.EXCESO_DE_RECORRIDO_ADELANTE_PUENTE || 0},\n  ${alarmas.EXCESO_DE_RECORRIDO_ATRAS_PUENTE || 0},\n  ${alarmas.PROTECCION_VARIADOR_TRASLACION_PUENTE || 0},\n  ${alarmas.PROTECCION_MOTOR_TRASLACION_PUENTE || 0},\n  ${alarmas.PROTECCION_MOTOR_ENCLAVAMIENTO_PUENTE || 0},\n  ${alarmas.PROTECCION_FRENOS || 0},\n  ${alarmas.DEFECTO_VARIADOR_TRASLACION_PUENTE || 0},\n  ${alarmas.EXCESO_DE_VELOCIDAD_PUENTE || 0},\n  ${alarmas.DEFECTO_FOTOCELULA_GALIBO_PUENTE || 0},\n  ${alarmas.TIEMPO_CICLO_TRASLACION_PUENTE || 0},\n  ${alarmas.TIEMPO_CICLO_ENCLAVAMIENTO_PUENTE || 0},\n  ${alarmas.DEFECTO_DETECTORES_TRASLACION_PUENTE || 0},\n  ${alarmas.DEFECTO_DETECTORES_ENCLAVAMIENTO_PUENTE || 0},    \n  NOW()\n)\nON DUPLICATE KEY UPDATE\n  emergencia_puente_transbordo = VALUES(emergencia_puente_transbordo),\n  exceso_recorrido_adelante_puente = VALUES(exceso_recorrido_adelante_puente),\n  exceso_recorrido_atras_puente = VALUES(exceso_recorrido_atras_puente),\n  proteccion_variador_traslacion_puente = VALUES(proteccion_variador_traslacion_puente),\n  proteccion_motor_traslacion_puente = VALUES(proteccion_motor_traslacion_puente),\n  proteccion_motor_enclavamiento_puente = VALUES(proteccion_motor_enclavamiento_puente),\n  proteccion_frenos = VALUES(proteccion_frenos),\n  defecto_variador_traslacion_puente = VALUES(defecto_variador_traslacion_puente),\n  exceso_velocidad_puente = VALUES(exceso_velocidad_puente),\n  defecto_fotocelula_galibo_puente = VALUES(defecto_fotocelula_galibo_puente),\n  tiempo_ciclo_traslacion_puente = VALUES(tiempo_ciclo_traslacion_puente),\n  tiempo_ciclo_enclavamiento_puente = VALUES(tiempo_ciclo_enclavamiento_puente),\n  defecto_detectores_traslacion_puente = VALUES(defecto_detectores_traslacion_puente),\n  defecto_detectores_enclavamiento_puente = VALUES(defecto_detectores_enclavamiento_puente),\n  timestamp = VALUES(timestamp);\n`;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1720,
+        "y": 580,
+        "wires": [
+            [
+                "e48c8757dda1b886"
+            ]
+        ]
+    }
+]
